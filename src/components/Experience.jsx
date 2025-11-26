@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { portfolioData } from '../data/portfolioData';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { portfolioData } from "../data/portfolioData";
 
 const ProjectCard = ({ project, index }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,19 +13,25 @@ const ProjectCard = ({ project, index }) => {
   // 중첩된 bullet 렌더링 함수
   const renderItem = (item, itemIdx) => {
     // 중첩 구조인 경우 (객체)
-    if (typeof item === 'object' && item.text) {
+    if (typeof item === "object" && item.text) {
       return (
         <div key={itemIdx} className="space-y-2">
           <div className="flex items-start">
             <span className="text-blue-600 mr-2 mt-1 flex-shrink-0">•</span>
-            <span className="text-sm text-gray-700 leading-relaxed">{item.text}</span>
+            <span className="text-sm text-gray-700 leading-relaxed">
+              {item.text}
+            </span>
           </div>
           {item.subItems && (
             <div className="ml-6 space-y-1">
               {item.subItems.map((subItem, subIdx) => (
                 <div key={subIdx} className="flex items-start">
-                  <span className="text-gray-400 mr-2 mt-0.5 flex-shrink-0">-</span>
-                  <span className="text-sm text-gray-600 leading-relaxed">{subItem}</span>
+                  <span className="text-gray-400 mr-2 mt-0.5 flex-shrink-0">
+                    -
+                  </span>
+                  <span className="text-sm text-gray-600 leading-relaxed">
+                    {subItem}
+                  </span>
                 </div>
               ))}
             </div>
@@ -52,16 +58,22 @@ const ProjectCard = ({ project, index }) => {
     >
       <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
         <div>
-          <h3 className="text-2xl font-bold mb-2 text-gray-900">{project.title}</h3>
-          <p className="text-sm text-blue-600 font-semibold mb-2">{project.role}</p>
+          <h3 className="text-2xl font-bold mb-2 text-gray-900">
+            {project.title}
+          </h3>
+          <p className="text-sm text-blue-600 font-semibold mb-2">
+            {project.role}
+          </p>
         </div>
         <span className="text-sm text-gray-600 whitespace-nowrap font-medium bg-gray-100 px-4 py-1 rounded-full">
           {project.period}
         </span>
       </div>
-      
-      <p className="text-gray-800 mb-4 leading-relaxed">{project.description}</p>
-      
+
+      <p className="text-gray-800 mb-4 leading-relaxed">
+        {project.description}
+      </p>
+
       {/* 기본 표시되는 주요 성과 (3개) */}
       {!isExpanded && project.details && (
         <div className="space-y-3 mb-4">
@@ -74,11 +86,16 @@ const ProjectCard = ({ project, index }) => {
               <div className="ml-4 space-y-2">
                 {achievement.items.slice(0, 2).map((item, itemIdx) => {
                   // 중첩된 경우 subItems는 표시하지 않음 (접힌 상태)
-                  const displayText = typeof item === 'object' && item.text ? item.text : item;
+                  const displayText =
+                    typeof item === "object" && item.text ? item.text : item;
                   return (
                     <div key={itemIdx} className="flex items-start">
-                      <span className="text-gray-400 mr-2 mt-0.5 flex-shrink-0">-</span>
-                      <p className="text-sm text-gray-700 leading-relaxed">{displayText}</p>
+                      <span className="text-gray-400 mr-2 mt-0.5 flex-shrink-0">
+                        -
+                      </span>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {displayText}
+                      </p>
                     </div>
                   );
                 })}
@@ -87,20 +104,22 @@ const ProjectCard = ({ project, index }) => {
           ))}
         </div>
       )}
-      
+
       {/* 더보기 클릭 시 전체 상세 내용 */}
       <AnimatePresence>
         {isExpanded && project.details && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="mb-4 overflow-hidden"
           >
             {/* 기술 스택 */}
             <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-              <h4 className="text-sm font-bold text-gray-800 mb-3">기술 스택</h4>
+              <h4 className="text-sm font-bold text-gray-800 mb-3">
+                기술 스택
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {project.details.techStack.map((tech, idx) => (
                   <span
@@ -112,7 +131,7 @@ const ProjectCard = ({ project, index }) => {
                 ))}
               </div>
             </div>
-            
+
             {/* 전체 성과 */}
             <div className="space-y-4">
               {project.details.achievements.map((achievement, idx) => (
@@ -121,7 +140,9 @@ const ProjectCard = ({ project, index }) => {
                     {achievement.category}
                   </h4>
                   <div className="space-y-2">
-                    {achievement.items.map((item, itemIdx) => renderItem(item, itemIdx))}
+                    {achievement.items.map((item, itemIdx) =>
+                      renderItem(item, itemIdx)
+                    )}
                   </div>
                 </div>
               ))}
@@ -129,7 +150,7 @@ const ProjectCard = ({ project, index }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* 더보기/접기 버튼 */}
       {project.details && (
         <button
@@ -139,21 +160,41 @@ const ProjectCard = ({ project, index }) => {
           {isExpanded ? (
             <>
               <span>접기</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
               </svg>
             </>
           ) : (
             <>
               <span>상세 내용 보기</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </>
           )}
         </button>
       )}
-      
+
       {/* 태그 */}
       <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-200">
         {project.tags.map((tag, idx) => (
@@ -175,6 +216,29 @@ const Experience = () => {
     threshold: 0.1,
   });
 
+  const careerTimeline = [
+    {
+      period: "2025.05 ~ 2025.09",
+      role: "Frontend SA",
+      task: "LG전자 AI 챗봇 - 아키텍처 설계, 성능 최적화",
+    },
+    {
+      period: "2023.05 ~ 2023.12",
+      role: "Fullstack Developer",
+      task: "신세계백화점 - 백오피스 + 앱 화면 개발",
+    },
+    {
+      period: "2022.02 ~ 2022.10",
+      role: "선도개발 (공통 담당)",
+      task: "신한은행 - Atomic Design 컴포넌트",
+    },
+    {
+      period: "2019.08 ~ 2021.08",
+      role: "Fullstack Developer",
+      task: "LG화학 MES - 생산관리 시스템 운영",
+    },
+  ];
+
   return (
     <section id="experience" className="py-24 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -187,15 +251,80 @@ const Experience = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-900">
             Experience
           </h2>
-          
+
           {portfolioData.experience.map((exp, expIndex) => (
             <div key={expIndex} className="mb-12">
               <div className="mb-8">
-                <h3 className="text-3xl font-bold mb-2 text-gray-900">{exp.company}</h3>
+                <h3 className="text-3xl font-bold mb-2 text-gray-900">
+                  {exp.company}
+                </h3>
                 <p className="text-gray-700 font-medium">{exp.position}</p>
                 <p className="text-gray-600 text-sm">{exp.period}</p>
               </div>
-              
+
+              {/* 경력 타임라인 */}
+              <div className="mb-12 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl">
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  경력 타임라인
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse bg-white rounded-lg overflow-hidden">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="border border-gray-300 px-4 py-3 text-left text-sm font-bold text-gray-700">
+                          기간
+                        </th>
+                        <th className="border border-gray-300 px-4 py-3 text-left text-sm font-bold text-gray-700">
+                          역할
+                        </th>
+                        <th className="border border-gray-300 px-4 py-3 text-left text-sm font-bold text-gray-700">
+                          주요 업무
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {careerTimeline.map((item, idx) => (
+                        <tr
+                          key={idx}
+                          className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                        >
+                          <td className="border border-gray-300 px-4 py-3 text-sm text-gray-700 whitespace-nowrap">
+                            {item.period}
+                          </td>
+                          <td className="border border-gray-300 px-4 py-3 text-sm font-semibold text-blue-600">
+                            {item.role}
+                          </td>
+                          <td className="border border-gray-300 px-4 py-3 text-sm text-gray-700">
+                            {item.task}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* 역할 변화 */}
+                <div className="mt-6 p-4 bg-white rounded-lg border border-gray-200">
+                  <p className="text-sm text-gray-800 mb-2">
+                    <strong className="text-gray-900">역할 변화:</strong>
+                  </p>
+                  <div className="space-y-1 text-sm">
+                    <p className="text-gray-700">
+                      • <strong>초기 (2019-2021):</strong> 풀스택 개발자 - 현업
+                      소통, 기능 개발, 운영
+                    </p>
+                    <p className="text-gray-700">
+                      • <strong>중기 (2022-2023):</strong> 프론트엔드 개발자 -
+                      공통 컴포넌트, 협업 도구
+                    </p>
+                    <p className="text-gray-700">
+                      • <strong>현재 (2025):</strong> Frontend SA - 아키텍처
+                      설계, 팀 리드
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-8">
                 {exp.projects.map((project, projectIndex) => (
                   <ProjectCard
