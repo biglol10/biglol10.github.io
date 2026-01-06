@@ -137,6 +137,74 @@ export const portfolioData = {
           },
         },
         {
+          title: "Frontier CLI - React 프로젝트 스캐폴딩 도구",
+          period: "2024. 03. ~ 2024. 04.",
+          role: "CLI 도구 개발",
+          description: "회사 내부 과제용 React 프로젝트 스캐폴딩 도구",
+          tags: ["JavaScript", "Node.js", "Commander.js", "Express.js", "React"],
+          details: {
+            overview: "회사 내부 과제용 React 프로젝트 스캐폴딩 CLI 도구 개발",
+            techStack: [
+              "JavaScript",
+              "Node.js",
+              "Commander.js",
+              "Express.js",
+              "React",
+              "Lerna",
+              "prompts",
+              "cross-spawn",
+              "fs-extra",
+            ],
+            achievements: [
+              {
+                category: "Create React App(CRA) 소스 분석 및 자체 CLI 도구 구현",
+                items: [
+                  "CRA 동작 원리 분석을 통해 프로젝트 스캐폴딩 CLI 설계 및 개발",
+                  "Commander.js 기반 CLI 인터페이스 구현 (옵션 파싱, arguments 처리, 도움말 출력)",
+                  "--template, --templateFolder 옵션으로 JavaScript/TypeScript 템플릿 선택 기능",
+                ],
+              },
+              {
+                category: "대화형 프롬프트 기반 프로젝트 설정",
+                items: [
+                  "prompts 라이브러리로 Default/Manual 모드 분기 처리 구현",
+                  "Manual 모드: 사용자가 모듈 및 UI 라이브러리 직접 선택",
+                  "Default 모드: GitHub 저장소에서 템플릿 다운로드 등 의존성 자동 설치",
+                ],
+              },
+              {
+                category: "크로스 플랫폼 호환성 및 자동화",
+                items: [
+                  "cross-spawn 적용으로 Windows/Mac/Linux 환경 호환성 확보",
+                  "yarn/npm 자동 감지 후 의존성 설치 분기 처리",
+                  "Node.js 버전 검증 로직 구현 (v14 미만 차단)",
+                ],
+              },
+              {
+                category: "CRA 템플릿 제작 및 프로젝트 초기화 자동화",
+                items: [
+                  "JavaScript/TypeScript 두 가지 버전의 CRA 커스텀 템플릿 제작",
+                  "fs-extra로 템플릿 복사 및 프로젝트 구조 자동 생성",
+                ],
+              },
+              {
+                category: "웹 UI 대시보드 개발 (CLI-UI)",
+                items: [
+                  "Express.js 기반 로컬 서버로 웹 UI (React + Semantic UI 풀) 제공",
+                  "CLI 없이도 브라우저에서 프로젝트 생성 가능하도록 개선",
+                ],
+              },
+              {
+                category: "모노레포 구조 설계",
+                items: [
+                  "Lerna 기반 모노레포로 @frontier/cli, @frontier/cli-shared-utils 패키지 분리",
+                  "공통 유틸리티(브라우저 실행, 패키지 매니저 감지) 모듈화",
+                ],
+              },
+            ],
+          },
+        },
+        {
           title: "신세계백화점 디지털스토어 구축",
           period: "2023. 05. ~ 2023. 12.",
           role: "개발자",
